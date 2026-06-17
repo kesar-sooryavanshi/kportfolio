@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>EdPath AI</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: radial-gradient(circle at top, #1e1b4b, #020617);
+      color: white;
+    }
+
+    /* HEADER (ChatGPT style) */
+    .header {
+      padding: 16px 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    /* CENTER AREA (Gemini style) */
+    .container {
+      height: calc(100vh - 60px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 42px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #94a3b8;
+      margin-bottom: 30px;
+    }
+
+    /* INPUT */
+    .input-box {
+      display: flex;
+      background: rgba(30,41,59,0.8);
+      backdrop-filter: blur(10px);
+      padding: 12px;
+      border-radius: 14px;
+      width: 450px;
+      box-shadow: 0 0 20px rgba(99,102,241,0.3);
+    }
+
+    input {
+      flex: 1;
+      border: none;
+      outline: none;
+      background: transparent;
+      color: white;
+      font-size: 16px;
+    }
+
+    button {
+      background: linear-gradient(135deg,#6366f1,#8b5cf6);
+      border: none;
+      padding: 10px 18px;
+      border-radius: 10px;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+    }
+
+    /* SUGGESTIONS */
+    .suggestions {
+      margin-top: 25px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .card {
+      background: rgba(30,41,59,0.7);
+      padding: 12px 16px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: 0.3s;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .card:hover {
+      background: rgba(51,65,85,0.9);
+      transform: translateY(-3px);
+    }
+
+    /* GLOW BACKGROUND EFFECT */
+    .glow {
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      background: #6366f1;
+      filter: blur(120px);
+      opacity: 0.2;
+      top: 20%;
+      left: 30%;
+      z-index: -1;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <div class="header">🎓 EdPath AI</div>
+
+  <!-- GLOW -->
+  <div class="glow"></div>
+
+  <!-- MAIN -->
+  <div class="container">
+
+    <h1>Ask Anything. Learn Everything.</h1>
+    <p>Your AI Learning Partner</p>
+
+    <!-- INPUT -->
+    <div class="input-box">
+      <input id="input" placeholder="Ask anything..." />
+      <button onclick="send()">Send</button>
+    </div>
+
+    <!-- SUGGESTIONS -->
+    <div class="suggestions">
+      <div class="card" onclick="fill('Explain JavaScript simply')">
+        Explain JavaScript
+      </div>
+      <div class="card" onclick="fill('Create AI roadmap')">
+        AI roadmap
+      </div>
+      <div class="card" onclick="fill('Learn coding step by step')">
+        Learn coding
+      </div>
+      <div class="card" onclick="fill('Web development path')">
+        Web dev path
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function fill(text) {
+      document.getElementById("input").value = text;
+    }
+
+    function send() {
+      const value = document.getElementById("input").value;
+
+      if (!value) return;
+
+      alert("Next: Chat screen banega (Step 2)");
+    }
+  </script>
+
+</body>
+</html>
