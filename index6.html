@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>EdPath AI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial;
+      background: radial-gradient(circle at top, #1e1b4b, #020617);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    .header {
+      padding: 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .chat {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+      max-width: 700px;
+      margin: auto;
+      width: 100%;
+    }
+
+    .msg {
+      margin: 10px 0;
+      line-height: 1.5;
+    }
+
+    .user {
+      text-align: right;
+      color: #a5b4fc;
+    }
+
+    .ai {
+      text-align: left;
+      color: #e2e8f0;
+    }
+
+    .input-box {
+      display: flex;
+      gap: 10px;
+      padding: 10px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      background: #020617;
+    }
+
+    input {
+      flex: 1;
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      background: #1e293b;
+      color: white;
+    }
+
+    button {
+      padding: 10px 15px;
+      border-radius: 10px;
+      border: none;
+      background: #6366f1;
+      color: white;
+      cursor: pointer;
+    }
+
+    .empty {
+      text-align: center;
+      margin-top: 100px;
+      color: #64748b;
+    }
+
+    @media(max-width:600px){
+      .chat {
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="header">🎓 EdPath AI</div>
+
+  <div class="chat" id="chat">
+    <div class="empty">Ask anything to start learning 🚀</div>
+  </div>
+
+  <div class="input-box">
+    <input id="input" placeholder="Ask anything..." />
+    <button onclick="send()">Send</button>
+  </div>
+
+  <script>
+    function fakeAI(text) {
+      text = text.toLowerCase();
+
+      if (text.includes("hello")) return "Hi 👋 How can I help?";
+      if (text.includes("ai")) return "AI means Artificial Intelligence 🤖";
+      if (text.includes("coding")) return "Start with HTML, CSS, JavaScript 🚀";
+      if (text.includes("roadmap")) return "1. Basics → 2. Projects → 3. Advanced → 4. Job 🚀";
+
+      return "That's interesting! Tell me more 😄";
+    }
+
+    function send() {
+      const input = document.getElementById("input");
+      const chat = document.getElementById("chat");
+
+      const text = input.value.trim();
+      if (!text) return;
+
+      // remove empty text
+      const empty = document.querySelector(".empty");
+      if (empty) empty.remove();
+
+      // user message
+      const userDiv = document.createElement("div");
+      userDiv.className = "msg user";
+      userDiv.innerText = "You: " + text;
+      chat.appendChild(userDiv);
+
+      input.value = "";
+
+      // AI reply
+      setTimeout(() => {
+        const aiDiv = document.createElement("div");
+        aiDiv.className = "msg ai";
+        aiDiv.innerText = "AI: " + fakeAI(text);
+        chat.appendChild(aiDiv);
+
+        chat.scrollTop = chat.scrollHeight;
+      }, 500);
+    }
+  </script>
+
+</body>
+</html>
