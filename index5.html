@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>EdPath AI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial;
+      background: radial-gradient(circle at top, #1e1b4b, #020617);
+      color: white;
+    }
+
+    .header {
+      padding: 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .center {
+      height: 90vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .input-box {
+      display: flex;
+      width: 90%;
+      max-width: 500px;
+      background: #1e293b;
+      border-radius: 12px;
+      padding: 10px;
+    }
+
+    input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: white;
+      outline: none;
+    }
+
+    button {
+      background: #6366f1;
+      border: none;
+      padding: 10px;
+      border-radius: 8px;
+      color: white;
+      cursor: pointer;
+    }
+
+    .chat {
+      display: none;
+      flex-direction: column;
+      height: 90vh;
+    }
+
+    .messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 15px;
+    }
+
+    .msg {
+      margin: 10px 0;
+    }
+
+    .user {
+      text-align: right;
+    }
+
+    .ai {
+      text-align: left;
+      color: #c7d2fe;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="header">🎓 EdPath AI</div>
+
+  <!-- LANDING -->
+  <div id="landing" class="center">
+    <h1>Ask Anything</h1>
+
+    <div class="input-box">
+      <input id="input" placeholder="Ask something..." />
+      <button onclick="startChat()">Send</button>
+    </div>
+  </div>
+
+  <!-- CHAT -->
+  <div id="chatPage" class="chat">
+    <div class="messages" id="messages"></div>
+
+    <div class="input-box">
+      <input id="chatInput" placeholder="Type..." />
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <script>
+    function fakeAI(text) {
+      text = text.toLowerCase();
+
+      if (text.includes("hello")) return "Hi 👋 How can I help?";
+      if (text.includes("ai")) return "AI = Artificial Intelligence 🤖";
+      if (text.includes("coding")) return "Start with HTML, CSS, JavaScript 🚀";
+      if (text.includes("roadmap")) return "Step 1: Basics → Step 2: Projects → Step 3: Advanced";
+      
+      return "I'm learning... try asking something else 😄";
+    }
+
+    function startChat() {
+      const input = document.getElementById("input").value;
+      if (!input) return;
+
+      document.getElementById("landing").style.display = "none";
+      document.getElementById("chatPage").style.display = "flex";
+
+      addMessage("user", input);
+      setTimeout(() => {
+        addMessage("ai", fakeAI(input));
+      }, 500);
+    }
+
+    function sendMessage() {
+      const inputBox = document.getElementById("chatInput");
+      const text = inputBox.value;
+
+      if (!text) return;
+
+      addMessage("user", text);
+      inputBox.value = "";
+
+      setTimeout(() => {
+        addMessage("ai", fakeAI(text));
+      }, 500);
+    }
+
+    function addMessage(role, text) {
+      const msgBox = document.getElementById("messages");
+
+      const div = document.createElement("div");
+      div.className = "msg " + role;
+      div.innerText = (role === "user" ? "You: " : "AI: ") + text;
+
+      msgBox.appendChild(div);
+      msgBox.scrollTop = msgBox.scrollHeight;
+    }
+  </script>
+
+</body>
+</html>
